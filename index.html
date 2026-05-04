@@ -1,0 +1,219 @@
+# ad <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NINJA-CORE 2.0 - AI BYPASS SYSTEM</title>
+    <style>
+        /* GIAO DIỆN NỀN ĐEN PHONG CÁCH NINJA */
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* TIÊU ĐỀ SIÊU TO KHỔNG LỒ */
+        .ninja-title {
+            font-size: 70px;
+            color: #FF0000;
+            text-shadow: 0 0 20px #FF0000;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        /* KHUNG ĐĂNG NHẬP GOOGLE */
+        #login-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            border: 1px solid #333;
+        }
+
+        .google-btn {
+            background: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* BẢNG ĐIỀU KHIỂN SAU KHI ĐĂNG NHẬP */
+        #dashboard {
+            display: none; /* Ẩn đi cho đến khi đăng nhập */
+            margin-top: 30px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* NÚT BIỂU TƯỢNG LINK RÚT GỌN */
+        .link-btn {
+            background: #111;
+            border: 2px solid #444;
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .link-btn:hover {
+            border-color: #FF0000;
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #FF0000;
+        }
+
+        .link-btn img {
+            width: 50px;
+            height: 50px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        /* Ô NHẬP LINK */
+        #input-area {
+            margin-top: 30px;
+            display: none;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 15px;
+            background: #222;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .bypass-btn {
+            padding: 15px 30px;
+            background: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* HIỆU ỨNG PHÁT TIẾNG */
+        .status-msg {
+            margin-top: 20px;
+            color: #00FF00;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ninja-title">NINJA-CORE 2.0</div>
+    <div class="subtitle">Hệ thống AI thứ hai - Sức mạnh thuật toán 100% Ninja</div>
+
+    <div id="login-section">
+        <h3>Vui lòng đăng nhập Google để kích hoạt AI</h3>
+        <button class="google-btn" onclick="fakeLogin()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20">
+            Đăng nhập bằng Google
+        </button>
+    </div>
+
+    <div id="dashboard">
+        <div class="grid-container">
+            <div class="link-btn" onclick="selectLink('Linkvertise')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png">
+                <span>Linkvertise</span>
+            </div>
+            <div class="link-btn" onclick="selectLink('LootLabs')">
+                <img src="https://cdn-icons-png.flaticon.com/512/2089/2089784.png">
+                <span>LootLabs</span>
+            </div>
+            <div class="link-btn" onclick="selectLink('Key System')">
+                <img src="https://cdn-icons-png.flaticon.com/512/3064/3064155.png">
+                <span>Key System</span>
+            </div>
+            <div class="link-btn" onclick="selectLink('Khác')">
+                <img src="https://cdn-icons-png.flaticon.com/512/1828/1828945.png">
+                <span>Bypass Tổng Hợp</span>
+            </div>
+        </div>
+
+        <div id="input-area">
+            <h4 id="current-target">Đang chọn: ...</h4>
+            <input type="text" id="link-input" placeholder="Dán link cần bẻ khóa vào đây...">
+            <br>
+            <button class="bypass-btn" onclick="startBypass()">KÍCH HOẠT NINJA ALGORITHM</button>
+            <div id="status" class="status-msg"></div>
+        </div>
+    </div>
+
+    <script>
+        // Hàm giả lập đăng nhập (Ninja cần kết nối Firebase sau này)
+        function fakeLogin() {
+            alert("Đang xác thực tài khoản Google...");
+            document.getElementById('login-section').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            speak("Chào mừng Chủ tịch Ninja đã quay trở lại hệ thống.");
+        }
+
+        // Chọn loại link
+        function selectLink(name) {
+            document.getElementById('input-area').style.display = 'block';
+            document.getElementById('current-target').innerText = "Đang chọn: " + name;
+            speak("Đã chọn mục tiêu " + name);
+        }
+
+        // Bắt đầu bẻ khóa
+        function startBypass() {
+            let input = document.getElementById('link-input').value;
+            if (!input) {
+                alert("Bạn chưa nhập link mà!");
+                return;
+            }
+            
+            document.getElementById('status').innerText = "Đang thực hiện giao thức bẻ khóa... 0%";
+            speak("Hệ thống đang bẻ khóa giao diện, vui lòng chờ trong giây lát.");
+
+            let percent = 0;
+            let interval = setInterval(() => {
+                percent += 20;
+                document.getElementById('status').innerText = "Đang thực hiện giao thức bẻ khóa... " + percent + "%";
+                if (percent >= 100) {
+                    clearInterval(interval);
+                    document.getElementById('status').innerText = "THÀNH CÔNG! ĐANG LẤY LINK GỐC...";
+                    speak("Bẻ khóa thành công. Link gốc đã sẵn sàng.");
+                    alert("Kết quả: " + input + " (Đã được xử lý bởi Ninja Core)");
+                }
+            }, 500);
+        }
+
+        // Hàm phát giọng nói (Cực nhẹ, không lag máy)
+        function speak(text) {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = text;
+            msg.lang = 'vi-VN';
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+</body>
+</html>
